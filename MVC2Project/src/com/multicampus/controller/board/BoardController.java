@@ -1,9 +1,13 @@
 package com.multicampus.controller.board;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.multicampus.biz.board.BoardService;
 import com.multicampus.biz.board.BoardVO;
@@ -12,9 +16,16 @@ import com.multicampus.biz.board.BoardVO;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	
+
 	@RequestMapping("/insertBoard.do")
-	public String insertBoard(BoardVO vo) {
+	public String insertBoard(BoardVO vo) throws IllegalStateException, IOException {
+		// 파일 업로드 처리
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(!uploadFile.isEmpty()) {
+			String file = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("C:/" + file));
+		}
+		
 		boardService.insertBoard(vo);
 		return "getBoardList.do";
 	}
@@ -32,17 +43,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoard.do")
-	public ModelAndView getBoard(BoardVO vo, ModelAndView mav) {
-		mav.addObject("board", boardService.getBoard(vo)); // Model 정보 저장
-		mav.setViewName("getBoard.jsp");   // View  정보 저장
-		return mav;
+	public String getBoard(BoardVO vo, Model model){
+		model.addAttribute("board", boardService.getBoard(vo)); // Model 정보 저장
+		return "getBoard.jsp";   // View 이름 리턴
 	}
 	
 	@RequestMapping("/getBoardList.do")
-	public ModelAndView getBoardList(BoardVO vo, ModelAndView mav) {
-		mav.addObject("boardList", boardService.getBoardList(vo)); // Model 정보 저장
-		mav.setViewName("getBoardList.jsp");   // View  정보 저장
-		return mav;
+	public String getBoardList(BoardVO vo, Model model) {
+		model.addAttribute("boardList", boardService.getBoardList(vo)); // Model 정보 저장
+		return "getBoardList.jsp";   // View 이름 리턴
 	}
 
 }
