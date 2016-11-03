@@ -61,5 +61,8 @@ plain old java object의 줄임말이다. 어떠한 클래스 상속이나 인터페이스 구현 없이 
 
  - EL로 get방식에 파라미터를 넘겨주고 싶을 때, 컨테이너에서 설정해준 내용을 넣고 싶다면 클래스 이름에서 첫글자만 소문자로 바꾼것을 이용한다.
  - 그게 아니라면 @ModelAttribute("name") UserVO vo 와 같이 함수 선언문 파라미터 앞에 넣어주면 된다.
+
+ - 줄때 뿐만 아니라 받을 때에도 @RequestParam("name") String name 등과 같이 전달받을 수 있다.
+ - 그렇지만 많아지면 불편하니까 그냥 VO쓰는경우가 많다. 그렇지만 defaultValue 설정을 이용해서 독자적으로 사용될 수도 있다.
 7. spring-iBatis
 8. spring-Mybatis
