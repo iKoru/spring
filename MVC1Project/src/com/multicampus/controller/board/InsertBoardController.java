@@ -10,7 +10,7 @@ import com.multicampus.biz.board.BoardDAO;
 import com.multicampus.biz.board.BoardVO;
 
 public class InsertBoardController implements Controller {
-
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		// 1. 사용자 입력정보 추출
@@ -28,10 +28,9 @@ public class InsertBoardController implements Controller {
 		boardDAO.insertBoard(vo);
 		
 		// 3. 화면 네비게이션
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("getBoardList.do");
-		return mv;
-		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:getBoardList.do");
+		return mav;	
 	}
 
 }

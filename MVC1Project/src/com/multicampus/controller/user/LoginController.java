@@ -10,7 +10,7 @@ import com.multicampus.biz.user.UserDAO;
 import com.multicampus.biz.user.UserVO;
 
 public class LoginController implements Controller {
-
+	
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		// 1. 사용자 입력정보 추출
@@ -25,16 +25,17 @@ public class LoginController implements Controller {
 		UserDAO userDAO = new UserDAO();
 		UserVO user = userDAO.getUser(vo);
 		
-		
-		ModelAndView mv = new ModelAndView();
-		
 		// 3. 화면 네비게이션
+		ModelAndView mav = new ModelAndView();
 		if(user != null) {
-			mv.setViewName("getBoardList.do");
+			mav.setViewName("redirect:getBoardList.do");
 		} else {
-			mv.setViewName("login.jsp");
+			mav.setViewName("login");
 		}
-		return mv;
+		return mav;
 	}
 
 }
+
+
+

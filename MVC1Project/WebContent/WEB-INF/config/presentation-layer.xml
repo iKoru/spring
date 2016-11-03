@@ -25,4 +25,13 @@
 	<bean id="deleteBoard" class="com.multicampus.controller.board.DeleteBoardController"></bean>
 	<bean id="getBoard" class="com.multicampus.controller.board.GetBoardController"></bean>
 
+	<!-- ViewResolver 등록 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/board/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	
 </beans>
+
+

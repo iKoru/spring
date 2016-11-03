@@ -2,7 +2,6 @@ package com.multicampus.controller.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -24,12 +23,11 @@ public class GetBoardController implements Controller {
 		BoardDAO boardDAO = new BoardDAO();
 		BoardVO board = boardDAO.getBoard(vo);
 		
-		// 3. 검색 결과를 세션에 저장하고 JSP 화면 정보를 리턴한다.
-		HttpSession session = request.getSession();
-		session.setAttribute("board", board);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("getBoard.jsp");
-		return mv;
+		// 3. 검색 결과와 View 이름을 ModelAndView에 저장하여 리턴한다.
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("board", board);   // Model 정보 저장
+		mav.setViewName("getBoard"); // View  정보 저장
+		return mav;
 	}
 
 }

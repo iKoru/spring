@@ -28,10 +28,9 @@ public class UpdateBoardController implements Controller {
 		boardDAO.updateBoard(vo);
 		
 		// 3. 화면 네비게이션
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("getBoardList.do");
-		return mv;
-	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:getBoardList.do");
+		return mav;	
 	}
 
 }
