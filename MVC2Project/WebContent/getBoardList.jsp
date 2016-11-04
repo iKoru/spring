@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=EUC-KR"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!-- 
@@ -13,12 +14,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title><spring:message code="message.board.list.mainTitle"/></title>
+<title>main title</title>
 </head>
 <body>
 <center>
-<h1><spring:message code="message.board.list.mainTitle"/></h1>
-<h3><font color="green">test</font><spring:message code="message.board.list.welcomeMsg"/>......
+<h1>main title</h1>
+<h3><font color="green">test</font>welcome......
 <a href="logout.do">Log-out</a></h3>
 
 <!-- 검색 시작 -->
@@ -27,11 +28,11 @@
 	<tr>
 		<td align="right">
 			<select name="searchCondition">
-			<option value="TITLE"><spring:message code="message.board.list.search.condition.title"/>
-			<option value="CONTENT"><spring:message code="message.board.list.search.condition.content"/>
+			<option value="TITLE">title
+			<option value="CONTENT">content
 			</select>
 			<input name="searchKeyword" type="text"/>
-			<input type="submit" value="<spring:message code="message.board.list.search.condition.btn"/>"/>
+			<input type="submit" value="submit"/>
 		</td>
 	</tr>
 	</table>
@@ -40,11 +41,11 @@
 
 <table border="1" cellpadding="0" cellspacing="0" width="700">
 <tr>
-	<th bgcolor="orange" width="100"><spring:message code="message.board.list.table.head.seq"/></th>
-	<th bgcolor="orange" width="200"><spring:message code="message.board.list.table.head.title"/></th>
-	<th bgcolor="orange" width="150"><spring:message code="message.board.list.table.head.writer"/></th>
-	<th bgcolor="orange" width="150"><spring:message code="message.board.list.table.head.regDate"/></th>
-	<th bgcolor="orange" width="100"><spring:message code="message.board.list.table.head.cnt"/></th>
+	<th bgcolor="orange" width="100">seq</th>
+	<th bgcolor="orange" width="200">title</th>
+	<th bgcolor="orange" width="150">writer</th>
+	<th bgcolor="orange" width="150">regDate</th>
+	<th bgcolor="orange" width="100">cnt</th>
 </tr>
 
 <c:forEach var="board" items="${boardList }">
@@ -52,14 +53,14 @@
 	<td>${board.seq }</td>
 	<td align="left"><a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
 	<td>${board.writer }</td>
-	<td>${board.regDate }</td>
+	<td><f:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/></td>
 	<td>${board.cnt }</td>
 </tr>
 </c:forEach>
 
 </table>
 <br>
-<a href="insertBoard.jsp"><spring:message code="message.board.list.link.insertBoard"/></a>
+<a href="insertBoard.jsp">insert new posting</a>
 </center>
 </body>
 </html>

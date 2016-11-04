@@ -2,25 +2,38 @@ package com.multicampus.biz.board;
 
 import java.util.List;
 
-public class BoardDAO {
+import org.apache.ibatis.session.SqlSession;
 
+import com.multicampus.biz.util.SqlSessionFactoryBean;
+
+public class BoardDAO {
+	private SqlSession mybatis;
+	
+	public BoardDAO(){
+		mybatis = SqlSessionFactoryBean.getSqlSessionInstance();
+	}
+	
 	public void insertBoard(BoardVO vo) {
-		
+		mybatis.insert("boardDAO.insertBoard", vo);
+		mybatis.commit();
 	}
 
 	public void updateBoard(BoardVO vo) {
-		
+		mybatis.update("boardDAO.updateBoard", vo);
+		mybatis.commit();
 	}
 
 	public void deleteBoard(BoardVO vo) {
-		
+		mybatis.delete("boardDAO.deleteBoard", vo);
+		mybatis.commit();
 	}
 
 	public BoardVO getBoard(BoardVO vo) {
-		return null;
+		return (BoardVO) (mybatis.selectOne("boardDAO.getBoard", vo));
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<BoardVO> getBoardList(BoardVO vo) {
-		return null;
+		return mybatis.selectList("boardDAO.getBoardList", vo);
 	}
 }

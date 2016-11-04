@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 	@Autowired
-	private BoardDAOibatis boardDAO;
+	private BoardDAOMybatis boardDAO;
 
 	public void insertBoard(BoardVO vo) {
 		boardDAO.insertBoard(vo);
@@ -27,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	public List<BoardVO> getBoardList(BoardVO vo) {
+		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
 		return boardDAO.getBoardList(vo);
 	}
 

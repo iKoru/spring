@@ -16,6 +16,7 @@ public class BoardServiceClient {
 		vo.setContent("myBatis ³»¿ë.....");		
 		boardDAO.insertBoard(vo);
 
+		vo.setSearchKeyword("");
 		List<BoardVO> boardList = boardDAO.getBoardList(vo);
 		for (BoardVO board : boardList) {
 			System.out.println("---> " + board.toString());
