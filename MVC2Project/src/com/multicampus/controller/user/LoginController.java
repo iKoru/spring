@@ -19,7 +19,6 @@ public class LoginController {
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(UserVO vo, UserDAO userDAO) {
-		int a = 1/0;
 		if(userDAO.getUser(vo) != null) return "getBoardList.do";
 		else return "login.jsp";
 	}

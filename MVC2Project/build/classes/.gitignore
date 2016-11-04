@@ -2,3 +2,5 @@
 /com/
 /log4j.xml
 /message/
+/mappings/
+/sql-map-config.xml

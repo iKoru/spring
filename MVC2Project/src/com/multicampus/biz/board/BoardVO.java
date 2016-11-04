@@ -1,19 +1,49 @@
 package com.multicampus.biz.board;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 // 1. VO(Value Object == Data Transfer Object) Å¬·¡½º
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BoardVO {
+	@XmlAttribute
 	private int seq;
 	private String title;
 	private String writer;
 	private String content;
 	private Date regDate;
 	private int cnt;
+	@XmlTransient
 	private MultipartFile uploadFile;
 	
+	@XmlTransient
+	private String searchCondition;
+	
+	@JsonIgnore
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	@JsonIgnore
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	@XmlTransient
+	private String searchKeyword;
+	
+	@JsonIgnore
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}

@@ -51,6 +51,8 @@ plain old java object의 줄임말이다. 어떠한 클래스 상속이나 인터페이스 구현 없이 
  - template method pattern
  - datasource가 필요하다. 어떤 DB종류와 연결되어 있는지 알아야 한다.
  - transaction 관리 : 스프링에서 지원한다. aop를 이용하여 적용할 수 있다. transactionManager와 tx:advice를 이용한다.
+ - select할 때에는 rowmapper라는 인터페이스를 인클루드 해야한다. 또 메서드를 구현해야함.. 불편합니다.
+
 
 6. spring mvc*
  1세대에는 mvc가 따로따로 구분되어있지 않았고, view와 controller가 합쳐져있었다. jsp에서 자바코드 실행하는 것을 예로 생각하면 편하다.
@@ -64,5 +66,20 @@ plain old java object의 줄임말이다. 어떠한 클래스 상속이나 인터페이스 구현 없이 
 
  - 줄때 뿐만 아니라 받을 때에도 @RequestParam("name") String name 등과 같이 전달받을 수 있다.
  - 그렇지만 많아지면 불편하니까 그냥 VO쓰는경우가 많다. 그렇지만 defaultValue 설정을 이용해서 독자적으로 사용될 수도 있다.
+
+ - 데이터 변환 : 크게 XML로의 변환(Object Xml Mapping), JSON으로의 변환 등이 있다.
+ - java jdk에서 지원하는 JAXB를 이용하면 된다. 보통 annotation기반으로 사용한다.
+ - 별도의 id를 언급해주지 않으면 xmlRootElement, Xmlelement 에서는 클래스명과 변수명을 따와서 이름으로 사용한다.
+ 
+ - 등록해야 하는 bean은 marshaller, marshallingview 클래스이다.
+ - jaxb2marshaller는, 변수로 받는 클래스 이름의 클래스에서 애너테이션을 체크한다.
+ - 변환된 xml 데이터를 marshallingview클래스를 통해서 웹브라우저에서 볼 수 있다. --> xmlview타입의 뷰 객체를 하나 멤버변수로 가지고 있어야 한다.
+ - json도 jsonview 클래스를 빈으로 등록해놓으면 된다. 인터페이스가 같음.
+
 7. spring-iBatis
+ - 스프링과 연동할 때에는 SqlMapClientTemplate 클래스를 이용해서 의존성 주입을 해줘야 한다.
+ - autowired도 추가. 
+ - template를 사용하는것과 그냥 클라이언트 사용하는것의 차이는 : exception 핸들링
+
+
 8. spring-Mybatis
