@@ -83,3 +83,12 @@ plain old java object의 줄임말이다. 어떠한 클래스 상속이나 인터페이스 구현 없이 
 
 
 8. spring-Mybatis
+ - ibatis와 거의 같다. 다른 점은 : 
+(1) parameterClass -> parameterType, (2) resultClass -> resultType, (3) typeAliases 설정은 sqlMapConfig에서 넣어준다.
+(4) config에서 해주는 것은 모든 맵퍼에서 모두 공유할 수 있다.
+(5) sqlMap -> mapper
+(6) select function : queryForObject -> selectOne, queryForList -> selectList
+(7) 변수 넣어주는 방법 : #name# -> #{name}
+(8) mapper에 namespace를 필수로 넣어줘야 한다.
+(9) autocommit이 기본으로 해제되어있다. 단 spring과 연동해서 트랜잭션 처리할 경우 안해줘도 된다.
+(10) sqlSessionTemplate에는 setter injection이 불가능하다. 생성자 주입으로 처리해줘야 한다.
